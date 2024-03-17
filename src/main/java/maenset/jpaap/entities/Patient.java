@@ -1,22 +1,24 @@
 package maenset.jpaap.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.databind.DatabindException;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Generated;
 import lombok.NoArgsConstructor;
 
 import javax.xml.crypto.Data;
+import java.util.Date;
+
 @Entity
 @lombok.Data @NoArgsConstructor @AllArgsConstructor
 
 public class Patient {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(length = 50)
     private String nom;
-    private Data dateNaissance;
+    @Temporal(TemporalType.DATE)
+    private Date dateNaissance;
     private Boolean malade;
     private int score;
 }
