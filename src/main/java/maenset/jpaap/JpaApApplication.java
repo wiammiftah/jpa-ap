@@ -2,10 +2,13 @@ package maenset.jpaap;
 
 import maenset.jpaap.Repositories.PatientRepository;
 import maenset.jpaap.entities.Patient;
+import org.apache.coyote.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.Date;
 import java.util.List;
@@ -21,11 +24,19 @@ public class JpaApApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		patientRepository.save(new Patient(null,"Hassan",new Date(),false,56));
-		patientRepository.save(new Patient(null,"Mohammed",new Date(),true,100));
-		patientRepository.save(new Patient(null,"Imane",new Date(),false,210));
-		List<Patient> patients = patientRepository.findAll();
-		patients.forEach(p->{
+		for (int i=0; i<100 ; i++){
+           patientRepository.save(
+				   new Patient(null ,"hassan", new Date() ,Math.random()>0.5?true:false, (int)(Math.random()*100))
+		   );
+		}
+		Page<Patient> patients = patientRepository.findAll(PageRequest.of(0,5));
+		System.out.println("Total pages:"+patients.getTotalPages());
+		System.out.println("Total elements:"+patients.getTotalElements());
+		System.out.println("Num page:"+patients.getNumber());
+		List<Patient> content = patients.getContent();
+		Page<Patient> ByMalade = patientRepository.findByMalade(true, PageRequest.of(3,5));
+		List<Patient> patientList=patientRepository.chercherPatients("%h%", 40 );
+		ByMalade.forEach(p->{
 			System.out.println("========================");
 			System.out.println(p.getId());
 			System.out.println(p.getNom());
