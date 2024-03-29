@@ -16,7 +16,7 @@ public class Patient {
     private String nom;
     @Temporal(TemporalType.DATE)
     private Date dateNaissance;
-    private StatusRDV status;
+    private boolean malade;
     @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
     private Collection<RendezVous> rendezVous;
 
