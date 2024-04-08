@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Entity
 @Data @NoArgsConstructor @AllArgsConstructor
 public class Role {
@@ -17,5 +18,5 @@ public class Role {
     private String roleName;
     @ManyToMany(fetch = FetchType.EAGER)
     //@JoinTable(name = "USERS_ROLES")//PAS OBLIGATOIRE
-    private List<User> users=new ArrayList<>();
+    private List<User> users = new ArrayList<>();
 }

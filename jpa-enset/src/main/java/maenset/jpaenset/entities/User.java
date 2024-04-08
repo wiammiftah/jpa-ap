@@ -11,11 +11,13 @@ import java.util.List;
 @Table(name = "USERS")
 @Data @NoArgsConstructor @AllArgsConstructor
 public class User {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     private String userId;
-    @Column(name = "USER_NAME",unique = true,length = 20)
+    @Column(name = "USER_NAME",unique = true, length = 20)
     private String username;
     private String password;
-    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "users",fetch = FetchType.EAGER)
     private List<Role> roles= new ArrayList<>();
+
 }
+

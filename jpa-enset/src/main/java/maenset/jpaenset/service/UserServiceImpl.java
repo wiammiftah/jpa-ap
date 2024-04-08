@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Role addNewRole(Role role) {
-        return roleRepository.save(role);
+       return roleRepository.save(role);
     }
 
     @Override
@@ -41,10 +41,11 @@ public class UserServiceImpl implements UserService {
     public void addRoleToUser(String username, String roleName) {
         User user=findUserByuserName(username);
         Role role=findRoleByroleName(roleName);
-        if (user.getRoles()!=null) {
+        if(user.getRoles()!=null) {
             user.getRoles().add(role);
             role.getUsers().add(user);
         }
+
         //userRepository.save(user);
 
     }
